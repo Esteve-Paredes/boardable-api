@@ -1,4 +1,6 @@
 import { Client, Pool } from "pg";
+import { config } from "dotenv";
+config();
 
 export const pool = new Pool({
   host: process.env["PGHOST"],
