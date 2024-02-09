@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import errorHandler from "./middleware/error";
 import authRouter from "./routers/auth-router";
+import boardsRouter from "./routers/boards-router";
 
 const app = express();
 const port = 5500;
@@ -15,6 +16,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use("/", authRouter);
+app.use("/", boardsRouter);
 
 app.use(errorHandler);
 
