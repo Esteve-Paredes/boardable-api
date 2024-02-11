@@ -1,16 +1,20 @@
 import express from "express";
 import { authenticateHandler } from "../middleware/authenticate";
-import { getBoards } from "../services/boards-services";
+import { getBoardById, getBoards } from "../services/boards-services";
 
 const boardsRouter = express.Router();
 
-boardsRouter.get("/", authenticateHandler, async (req, res, next) => {
+boardsRouter.get("/:id", authenticateHandler, async (req, res, next) => {
+  console.log(req.params);
   try {
-    const dataBoards = await getBoards(Number(req.headers.id));
-    console.log(dataBoards);
+    const boardData = await getBoards(req.params.id, req.userId);
+    const board = await getBoardById(req.params.id);
     res.json({
       ok: true,
-      data: dataBoards,
+      data: {
+        boardData: boardData,
+        color: board.color,
+      },
     });
   } catch (error) {
     next(error);
