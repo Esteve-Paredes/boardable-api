@@ -7,9 +7,7 @@ export const up: Migration = async (params) => {
     userId INT NOT NULL,
     boardId INT NOT NULL,
     task TEXT NOT NULL,
-    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (boardId) REFERENCES boards(id) ON DELETE CASCADE)`
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)`
   );
 };
 export const down: Migration = async (params) => {
