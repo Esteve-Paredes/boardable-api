@@ -1,8 +1,8 @@
 [
   "2024.02.12T01.20.11.create-users.ts",
   "2024.02.12T01.21.23.create-boards.ts",
-  "2024.02.12T01.26.38.create-boardtodo.ts",
-  "2024.02.21T23.13.22.foreign-key-boards.ts",
-  "2024.02.22T16.01.09.foreign-key-boardtodo.ts",
-  "2024.02.22T16.07.53.foreign-key-board-boardtodo.ts"
+  "2024.02.12T01.26.38.create-tasklist.ts",
+  "2024.03.03T18.45.00.foreign-key-boards-usersid.ts",
+  "2024.03.03T18.46.59.foreign-key-tasklist-usersid.ts",
+  "2024.03.03T18.48.16.foreign-key-tasklist-boardsid.ts"
 ]

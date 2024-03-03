@@ -4,6 +4,7 @@ import {
   deleteBoard,
   getBoardById,
   getBoards,
+  postNewList,
   updateBoard,
 } from "../services/boards-services";
 
@@ -21,6 +22,22 @@ boardsRouter.get("/:id", authenticateHandler, async (req, res, next) => {
         color: board.color,
       },
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+boardsRouter.post("/:id", authenticateHandler, async (req, res, next) => {
+  try {
+    const title = req.body.title;
+    if (req.userId) {
+      const userId = req.userId.toString();
+      const newList = await postNewList(userId, req.params.id, title);
+      res.json({
+        ok: true,
+        data: newList,
+      });
+    }
   } catch (error) {
     next(error);
   }

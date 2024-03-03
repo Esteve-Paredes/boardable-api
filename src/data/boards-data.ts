@@ -1,9 +1,10 @@
 import { number } from "zod";
 import { query } from "../db";
+import { tasklist } from "../models/task-list";
 
 export async function getBoards(boardId: string, userId: number) {
   return (
-    await query("SELECT * FROM boardtodo WHERE boardid = $1 AND userid = $2", [
+    await query("SELECT * FROM tasklist WHERE boardid = $1 AND userid = $2", [
       boardId,
       userId,
     ])
@@ -12,6 +13,19 @@ export async function getBoards(boardId: string, userId: number) {
 
 export async function getBoardById(boardId: string) {
   return (await query("SELECT * FROM boards WHERE id = $1", [boardId])).rows[0];
+}
+
+export async function postNewList(
+  userId: string,
+  boardId: string,
+  title: string
+): Promise<tasklist> {
+  return (
+    await query(
+      "INSERT INTO tasklist (userid, boardid, title) VALUES ($1, $2, $3) RETURNING *",
+      [userId, boardId, title]
+    )
+  ).rows[0];
 }
 
 export async function updateBoard(boardId: string, data: string) {
