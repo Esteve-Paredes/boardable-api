@@ -30,9 +30,10 @@ boardsRouter.get("/:id", authenticateHandler, async (req, res, next) => {
 boardsRouter.post("/:id", authenticateHandler, async (req, res, next) => {
   try {
     const title = req.body.title;
+    const boardId = req.params.id;
     if (req.userId) {
       const userId = req.userId.toString();
-      const newList = await postNewList(userId, req.params.id, title);
+      const newList = await postNewList(userId, boardId, title);
       res.json({
         ok: true,
         data: newList,

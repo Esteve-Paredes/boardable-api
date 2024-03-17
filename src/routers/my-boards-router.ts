@@ -17,7 +17,7 @@ myBoardsRouter.get("/", authenticateHandler, async (req, res, next) => {
   }
 });
 
-myBoardsRouter.post("/", async (req, res, next) => {
+myBoardsRouter.post("/", authenticateHandler, async (req, res, next) => {
   try {
     const newBoard = await postNewMyBoard(req.body);
     res.json({
