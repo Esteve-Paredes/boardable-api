@@ -20,7 +20,7 @@ app.use(express.json());
 app.use("/", authRouter);
 app.use("/", myBoardsRouter);
 app.use("/boards", boardsRouter);
-app.use("/boards", listTaskRouter); //implementar ruta
+app.use("/boards", listTaskRouter);
 
 app.use(errorHandler);
 
