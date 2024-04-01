@@ -5,6 +5,7 @@ import authRouter from "./routers/auth-router";
 import myBoardsRouter from "./routers/my-boards-router";
 import boardsRouter from "./routers/boards-router";
 import listTaskRouter from "./routers/list-task-router";
+import tasksRouter from "./routers/tasks-router";
 
 const app = express();
 const port = 5500;
@@ -21,6 +22,7 @@ app.use("/", authRouter);
 app.use("/", myBoardsRouter);
 app.use("/boards", boardsRouter);
 app.use("/boards", listTaskRouter);
+app.use("/boards", tasksRouter);
 
 app.use(errorHandler);
 
