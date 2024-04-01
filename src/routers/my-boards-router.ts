@@ -19,7 +19,7 @@ myBoardsRouter.get("/", authenticateHandler, async (req, res, next) => {
 
 myBoardsRouter.post("/", authenticateHandler, async (req, res, next) => {
   try {
-    const newBoard = await postNewMyBoard(req.body);
+    const newBoard = await postNewMyBoard(req.body, req.userId);
     res.json({
       ok: true,
       data: newBoard,

@@ -5,6 +5,11 @@ export async function getMyBoards(userID: number) {
   return await BoardsDB.getMyBoards(userID);
 }
 
-export async function postNewMyBoard(boardData: boardData) {
-  return await BoardsDB.postNewMyBoard(boardData);
+export async function postNewMyBoard(
+  board: boardData,
+  userId: number | undefined
+) {
+  if (userId) {
+    return await BoardsDB.postNewMyBoard(board, userId?.toString());
+  }
 }

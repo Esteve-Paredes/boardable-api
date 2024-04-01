@@ -1,5 +1,4 @@
 export type boardData = {
-  userId: number;
   title: string;
   color: string;
 };
