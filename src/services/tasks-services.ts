@@ -26,7 +26,7 @@ export async function updateTask(taskid: string, title: string) {
   return await taskData.updateTask(taskid, title);
 }
 
-export async function deleteTask(taskid: string | string[] | undefined) {
+export async function deleteTask(taskid: string | any) {
   if (taskid && !Array.isArray(taskid)) {
     return await taskData.deleteTask(taskid);
   }

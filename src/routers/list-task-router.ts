@@ -29,12 +29,12 @@ listTaskRouter.delete(
   authenticateHandler,
   async (req, res, next) => {
     try {
-      const { taskid } = req.headers;
-      if (taskid) {
-        const deleteListT = await deleteListTask(taskid.toString());
+      const { listTask } = req.query;
+      if (listTask) {
+        const deleteListT = await deleteListTask(listTask.toString());
         res.json({
           ok: true,
-          data: `Task ${taskid} eliminado`,
+          data: `Task ${listTask} eliminado`,
         });
       }
     } catch (error) {

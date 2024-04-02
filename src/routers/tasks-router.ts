@@ -46,8 +46,8 @@ tasksRouter.patch("/:id/task", authenticateHandler, async (req, res, next) => {
 
 tasksRouter.delete("/:id/task", authenticateHandler, async (req, res, next) => {
   try {
-    const { taskid } = req.headers;
-    const tasksDelete = await deleteTask(taskid);
+    const { taskId } = req.query;
+    const tasksDelete = await deleteTask(taskId);
     res.json({
       ok: true,
       data: tasksDelete,
