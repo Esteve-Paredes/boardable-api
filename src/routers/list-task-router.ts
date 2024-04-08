@@ -34,7 +34,7 @@ listTaskRouter.delete(
         const deleteListT = await deleteListTask(listTask.toString());
         res.json({
           ok: true,
-          data: `Task ${listTask} eliminado`,
+          data: deleteListT,
         });
       }
     } catch (error) {

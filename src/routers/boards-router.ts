@@ -12,8 +12,10 @@ const boardsRouter = express.Router();
 
 boardsRouter.get("/:id", authenticateHandler, async (req, res, next) => {
   try {
-    const boardData = await getBoards(req.params.id, req.userId);
-    const board = await getBoardById(req.params.id);
+    const { id } = req.params;
+    const { userId } = req;
+    const boardData = await getBoards(id, userId);
+    const board = await getBoardById(id);
     res.json({
       ok: true,
       data: {
@@ -29,16 +31,14 @@ boardsRouter.get("/:id", authenticateHandler, async (req, res, next) => {
 
 boardsRouter.post("/:id", authenticateHandler, async (req, res, next) => {
   try {
-    const title = req.body.title;
-    const boardId = req.params.id;
-    if (req.userId) {
-      const userId = req.userId.toString();
-      const newList = await postNewList(userId, boardId, title);
-      res.json({
-        ok: true,
-        data: newList,
-      });
-    }
+    const { id } = req.params;
+    const { userId } = req;
+    const { title } = req.body;
+    const newList = await postNewList(userId, id, title);
+    res.json({
+      ok: true,
+      data: newList,
+    });
   } catch (error) {
     next(error);
   }
@@ -46,8 +46,9 @@ boardsRouter.post("/:id", authenticateHandler, async (req, res, next) => {
 
 boardsRouter.patch("/:id", async (req, res, next) => {
   try {
-    const newTitle = await updateBoard(req.params.id, req.body.title);
-    console.log(newTitle);
+    const { id } = req.params;
+    const { title } = req.body;
+    const newTitle = await updateBoard(id, title);
     res.json({
       ok: true,
       data: newTitle,
@@ -59,8 +60,8 @@ boardsRouter.patch("/:id", async (req, res, next) => {
 
 boardsRouter.delete("/:id", authenticateHandler, async (req, res, next) => {
   try {
-    const boardDelete = await deleteBoard(req.params.id);
-    console.log(boardDelete);
+    const { id } = req.params;
+    const boardDelete = await deleteBoard(id);
     res.json({
       ok: true,
       data: boardDelete,

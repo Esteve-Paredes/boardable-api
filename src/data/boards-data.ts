@@ -27,9 +27,9 @@ export async function postNewList(
   ).rows[0];
 }
 
-export async function updateBoard(boardId: string, data: string) {
+export async function updateBoard(boardId: string, title: string) {
   return await query("UPDATE boards SET title = $1 WHERE id = $2", [
-    data,
+    title,
     boardId,
   ]);
 }

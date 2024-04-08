@@ -12,8 +12,9 @@ authRouter.post(
   validationHandler(userSchema),
   async (req, res, next) => {
     try {
-      const userCreated = await createUser(req.body);
-      const user = await validateCredentials(req.body);
+      const { body } = req;
+      const userCreated = await createUser(body);
+      const user = await validateCredentials(body);
       const payload = { userId: user.id, userName: user.username };
       const token = jwt.sign(payload, jwtSecret, { expiresIn: "40m" });
       res.status(200).json({
@@ -32,7 +33,8 @@ authRouter.post(
 
 authRouter.post("/login", async (req, res, next) => {
   try {
-    const user = await validateCredentials(req.body);
+    const { body } = req;
+    const user = await validateCredentials(body);
     const payload = { userId: user.id, userName: user.username };
     const token = jwt.sign(payload, jwtSecret, { expiresIn: "40m" });
     res.status(201).json({

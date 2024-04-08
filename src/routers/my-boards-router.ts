@@ -6,8 +6,8 @@ const myBoardsRouter = express.Router();
 
 myBoardsRouter.get("/", authenticateHandler, async (req, res, next) => {
   try {
-    const dataBoards = await getMyBoards(Number(req.headers.id));
-    console.log(dataBoards);
+    const { id } = req.headers;
+    const dataBoards = await getMyBoards(Number(id));
     res.json({
       ok: true,
       data: dataBoards,
@@ -19,7 +19,8 @@ myBoardsRouter.get("/", authenticateHandler, async (req, res, next) => {
 
 myBoardsRouter.post("/", authenticateHandler, async (req, res, next) => {
   try {
-    const newBoard = await postNewMyBoard(req.body, req.userId);
+    const { body, userId } = req;
+    const newBoard = await postNewMyBoard(body, userId);
     res.json({
       ok: true,
       data: newBoard,

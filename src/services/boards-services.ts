@@ -1,5 +1,4 @@
 import * as BoardsDB from "../data/boards-data";
-import { tasklist } from "../models/task-list";
 
 export async function getBoards(boardId: string, userId: number | undefined) {
   if (typeof userId === "number") {
@@ -13,15 +12,17 @@ export async function getBoardById(boardId: string) {
 }
 
 export async function postNewList(
-  userId: string,
+  userId: number | undefined,
   boardId: string,
   title: string
-): Promise<tasklist> {
-  return await BoardsDB.postNewList(userId, boardId, title);
+) {
+  if (userId) {
+    return await BoardsDB.postNewList(userId.toString(), boardId, title);
+  }
 }
 
-export async function updateBoard(boardId: string, data: string) {
-  return await BoardsDB.updateBoard(boardId, data);
+export async function updateBoard(boardId: string, title: string) {
+  return await BoardsDB.updateBoard(boardId, title);
 }
 
 export async function deleteBoard(boardId: string) {
