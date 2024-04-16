@@ -8,10 +8,10 @@ import listTaskRouter from "./routers/list-task-router";
 import tasksRouter from "./routers/tasks-router";
 
 const app = express();
-const port = 5500;
+const port = process.env["PORT"] || 5500;
 
 const corsOptions = {
-  origin: "http://127.0.0.1:5173",
+  origin: process.env["CLIENT_ORIGIN"],
   optionsSuccessStatus: 200,
 };
 
